@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
 /*
@@ -12,7 +13,7 @@ use Illuminate\Support\Carbon;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/task2',[EmployeeController::class, 'index']);
 //Task 1 part 1
 
 /* Route::get('/', function () {
