@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\Task3Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
 /*
@@ -49,7 +50,7 @@ Route::get('/user/{id?}', function (?int $id = 0) {
     echo $id;
 })->where('id', '[0-9]+'); */
 
-Route::get('/user/{id}/{name}', function ($id, $name) {
+/* Route::get('/user/{id}/{name}', function ($id, $name) {
     return "User ID: $id, Name: $name";
 })->where(['id' => '[0-9]+', 'name' => '[a-z]{3,}']);
 
@@ -64,4 +65,8 @@ Route::get('/users/{order}', function ($order) {
 Route::get('/{year}/{month}/{day}', function ($year, $month, $day) {
         $date = Carbon::createFromDate($year, $month, $day);
         return "Дата $year-$month-$day — это " . $date->translatedFormat('l');
-})->where(['year' => '[0-9]{4}', 'month' => '[0-9]{1,2}', 'day' => '[0-9]{1,2}']);
+})->where(['year' => '[0-9]{4}', 'month' => '[0-9]{1,2}', 'day' => '[0-9]{1,2}']); */
+
+//Task3
+
+Route::get('/task3',[Task3Controller::class,'task3']);
