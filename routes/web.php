@@ -7,6 +7,7 @@ use App\Http\Controllers\Task5Controller;
 use App\Http\Controllers\Task6Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,6 +83,9 @@ Route::get('/task61', [Task6Controller::class, 'view']); */
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+
+
 Route::get('register',[\App\Http\Controllers\UserController::class,'create'])->name('register');
 Route::post('register',[\App\Http\Controllers\UserController::class,'store'])->name('user.store');
 Route::get('login',[\App\Http\Controllers\UserController::class,'login'])->name('login');

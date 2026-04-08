@@ -20,7 +20,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label"></label>
+                <label for="email" class="form-label">Email</label>
                 <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email"
                 placeholder="Email" value="{{ old('email') }}">
                 @error('email')
@@ -30,7 +30,7 @@
 
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input name="" type="" class="form-control @error('password') is-invalid @enderror" id="password"
+                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" id="password"
                 placeholder="Password">
                 @error('password')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -39,12 +39,12 @@
 
             <div class="mb-3">
                 <label for="password-confirmation" class="form-label">Confirm Password</label>
-                <input name="password_confirmation" type="password" class="form-control" id="passwod_confirmation"
+                <input name="password_confirmation" type="password" class="form-control" id="password_confirmation"
                 placeholder="Confirm Password">
             </div>
 
             <div class="mb-3">
-                <label for="submit" class="btn btn-primary">Register</label>
+                <button for="submit" class="btn btn-primary">Register</button>
                 <a href="{{ route('login') }}" class="ms-3">Already registered?</a>
             </div>
         </form>
