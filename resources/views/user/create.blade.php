@@ -3,5 +3,52 @@
 @section('title','Home page')
 
 @section('content')
-    <h1 class="h2">Register form</h1>
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="h2">Register form</h1>
+
+        <form action="{{ route('user.store') }}" method="post">
+            @csrf
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                placeholder="Name" value="{{ old('name') }}">
+                @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label"></label>
+                <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                placeholder="Email" value="{{ old('email') }}">
+                @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input name="" type="" class="form-control @error('password') is-invalid @enderror" id="password"
+                placeholder="Password">
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="password-confirmation" class="form-label">Confirm Password</label>
+                <input name="password_confirmation" type="password" class="form-control" id="passwod_confirmation"
+                placeholder="Confirm Password">
+            </div>
+
+            <div class="mb-3">
+                <label for="submit" class="btn btn-primary">Register</label>
+                <a href="{{ route('login') }}" class="ms-3">Already registered?</a>
+            </div>
+        </form>
+    </div>
+</div>
+    
 @endsection
