@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Task3Controller;
+use App\Http\Controllers\Task4Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
 /*
@@ -70,3 +71,4 @@ Route::get('/{year}/{month}/{day}', function ($year, $month, $day) {
 //Task3
 
 Route::get('/task3',[Task3Controller::class,'task3']);
+Route::get('/task4',[Task4Controller::class,'task4']);

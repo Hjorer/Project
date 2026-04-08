@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
            $categories = \App\Models\Categories::factory(5)->create();
         \App\Models\Categories::factory(10)->create();
          \App\Models\Products::factory(20)->recycle($categories)->create();
+        \App\Models\userstask4::factory(10)->create();
+        \App\Models\productstask4::factory(10)->create();
+        \App\Models\articlesstask4::factory(10)->create();
     }
 }
