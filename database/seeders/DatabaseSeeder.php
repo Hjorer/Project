@@ -66,5 +66,14 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $member->id,
             ]);
         });
+        \App\Models\Desk::factory(5)
+            ->has(
+                \App\Models\DeskList::factory(3)
+                    ->has(
+                        \App\Models\Card::factory(5)
+                            ->hasTasks(3)
+                    )
+            )
+            ->create();
     }
 }
