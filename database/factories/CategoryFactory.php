@@ -1,13 +1,12 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Categories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\products>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class ProductsFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,6 @@ class ProductsFactory extends Factory
     {
         return [
             'name' =>$this->faker->name,
-            'category_id' => Categories::factory(), 
         ];
     }
 }

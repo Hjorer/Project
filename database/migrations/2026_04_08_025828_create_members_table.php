@@ -10,15 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('Name', 35);
-            $table->string('CountryCode', 3);
-            $table->string('District', 20);
-            $table->integer('Population')->default(0);
-            $table->foreign('CountryCode')->references('Code')->on('countries');
+            $table->string('login');
+            $table->string('password');
+            $table->foreignId('city_id')->constrained('cities');
+            $table->timestamps();
         });
-
     }
 
     /**
@@ -26,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('members');
     }
 };

@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-           $categories = \App\Models\Categories::factory(5)->create();
-        \App\Models\Categories::factory(10)->create();
-         \App\Models\Products::factory(20)->recycle($categories)->create();
+        $categories = \App\Models\Category::factory(5)->create();
+        \App\Models\Category::factory(10)->create();
+        \App\Models\Product::factory(20)->recycle($categories)->create();
         \App\Models\userstask4::factory(10)->create();
         \App\Models\productstask4::factory(10)->create();
         \App\Models\articlesstask4::factory(10)->create();
@@ -56,6 +56,14 @@ class DatabaseSeeder extends Seeder
                 'Language' => 'English',
                 'IsOfficial' => 'F',
                 'Percentage' => 10.0
+            ]);
+        });
+        $cities = City::factory(5)->create();
+        \App\Models\Member::factory(10)->create([
+            'city_id' => fn() => $cities->random()->id,
+        ])->each(function ($member) {
+            \App\Models\Profile::factory()->create([
+                'user_id' => $member->id,
             ]);
         });
     }
