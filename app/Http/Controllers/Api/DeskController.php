@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeskStoreRequest;
 use App\Http\Resources\DeskResource;
 use Illuminate\Http\Request;
 use http\Env\Response;
@@ -23,10 +24,21 @@ class DeskController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /* public function store(Request $request)
     {
-        //
+        $created_desk = Desk::create($request->all());
+
+        return new DeskResource($created_desk);
+    } */
+    public function store(DeskStoreRequest $request)
+    {
+        $created_desk = Desk::create($request->validated());
+
+        return new DeskResource($created_desk);
     }
 
     /**
@@ -43,18 +55,28 @@ class DeskController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\DeskStoreRequest  $request
+     * @param  \App\Models\Desk  $desk
+     * @return \App\Http\Resources\DeskResource
      */
-    public function update(Request $request, string $id)
+    public function update(DeskStoreRequest $request, Desk $desk)
     {
-        //
+        $desk->update($request->validated());
+
+        return new DeskResource($desk);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Desk $desk)
     {
-        //
+        $desk->delete();
+
+        return response(null, \Illuminate\Http\Response::HTTP_NO_CONTENT);
     }
-    
+
 }
