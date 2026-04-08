@@ -25,21 +25,28 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
-                </ul class="navbar-nav">
-                @if (Route::has('login'))
-                @auth
-                    <li class="nav-link">
-                        <a class="nav-link" href="#">Dashboard</a>
+
+                    @if (Route::has('login'))
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ auth()->user()->name }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                        </li>
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
-                @else
-                <li class="nav-link">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                </li>
-                <li class="nav-link">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
-                @endif
-                @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    @endif
+                    @endif
+                </ul>
             </div>
         </div>
     </nav>
@@ -53,7 +60,7 @@
                         @endforeach
                     </ul>
                 </div>
-            
+
             @endif
 
             @if (session('success'))

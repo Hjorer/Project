@@ -19,7 +19,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/task2',[EmployeeController::class, 'index']);
+Route::get('/task2', [EmployeeController::class, 'index']);
 //Task 1 part 1
 
 /* Route::get('/', function () {
@@ -85,23 +85,31 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('dashborad',[UserController::class,'dashboard'])->name('dashboard');
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('dashborad', [UserController::class, 'dashboard'])->name('dashboard');
+});
 
-Route::get('register',[UserController::class,'create'])->name('register');
-Route::post('register',[UserController::class,'store'])->name('user.store');
-Route::get('login',[UserController::class,'login'])->name('login');
 
-Route::get('verify-email', function(){
+Route::middleware('guest')->group(function () {
+    Route::get('register', [UserController::class, 'create'])->name('register');
+    Route::post('register', [UserController::class, 'store'])->name('user.store');
+    Route::get('login', [UserController::class, 'login'])->name('login');
+});
+
+
+Route::get('verify-email', function () {
     return view('user.verify-email');
 })->middleware('auth')->name('verification.notice');
 
-Route::get('/email/verify/{id}/{hash}',function(EmailVerificationRequest $request){
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect()->route('dashboard');
-})->middleware('auth','signed')->name('verification.verify');
+})->middleware('signed')->name('verification.verify');
 
-Route::post('/email/verification-notification',function(Request $request){
+Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('message','Verification link sent!');
-})->middleware(['auth','throttle:3,1'])->name('verification.send');
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['throttle:3,1'])->name('verification.send');
+
+Route::get('logout', [UserController::class, 'logout'])->name('logout');
