@@ -37,4 +37,18 @@ class UserController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
+    public function loginAuth(Request $request){
+        $credentials = $request->validate([
+            'email'=>['required','email'],
+            'password'=>['required'],
+        ]);
+        if (Auth::attempt($credentials,$request->boolean('remember'))){
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard')->with('succes','Welcome,' . Auth::user()->name . '!');
+        }
+        return back()->withErrors([
+            'email' =>'Неккортный логин и пароль',
+        ]);
+    }
 }
