@@ -72,8 +72,16 @@ Route::get('/{year}/{month}/{day}', function ($year, $month, $day) {
 
 //Task3
 
-Route::get('/task3',[Task3Controller::class,'task3']);
+/* Route::get('/task3',[Task3Controller::class,'task3']);
 Route::get('/task4',[Task4Controller::class,'task4']);
 Route::get('/task5', [Task5Controller::class, 'task5']);
 Route::get('/task6', [Task6Controller::class, 'task6']);
-Route::get('/task61', [Task6Controller::class, 'view']);
+Route::get('/task61', [Task6Controller::class, 'view']); */
+
+//Part 2 Task 1
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+Route::get('register',[\App\Http\Controllers\UserController::class,'create'])->name('register');
+Route::post('register',[\App\Http\Controllers\UserController::class,'store'])->name('user.store');
+Route::get('login',[\App\Http\Controllers\UserController::class,'login'])->name('login');
