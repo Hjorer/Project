@@ -53,7 +53,7 @@ class UserController extends Controller
         ]);
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard')->with('succes', 'Welcome,' . Auth::user()->name . '!');
+            return redirect()->intended('dashboard')->with('success', 'Welcome,' . Auth::user()->name . '!');
         }
         return back()->withErrors([
             'email' => 'Неккортный логин и пароль',

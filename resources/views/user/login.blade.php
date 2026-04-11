@@ -22,7 +22,7 @@
 
         <div class="mb-3 form-check">
             <input type="checkbox" id="remember" name="remember" class="form-check-input">
-            <label for="remeber" class="form-check-label">Remeber me</label>
+            <label for="remember" class="form-check-label">Remeber me</label>
         </div>
 
         <button type="submit" class="btn btn-primary">Login</button>
