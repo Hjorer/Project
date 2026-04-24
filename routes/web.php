@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ADMIN\MainController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Task3Controller;
 use App\Http\Controllers\Task4Controller;
@@ -127,3 +128,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['throttle:3,1'])->name('verification.send');
 
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
+Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
+    Route::get('/',[MainController::class,'index'])->name('admin.index');
+});
