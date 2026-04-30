@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Blog_Category;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Blog_Category::paginate(2);
+        $categories = Blog_Category::all();
         return view('admin.categories.index',compact('categories'));
     }
 
@@ -22,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -30,7 +31,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+        ]);
+        Blog_Category::create($request->only('title'));
+        // $request->session()->flash('success','Категория добавлена');
+        return redirect()->route('categories.index')->with('success','Категория добавлена');
     }
 
     /**
@@ -46,7 +52,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Blog_Category::find($id);
+        return view('admin.categories.edit',compact('category'));
     }
 
     /**
@@ -54,7 +61,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' =>'required',
+        ]);
+        $category = Blog_Category::find($id);
+        // $category->slug = null;
+        $category->update($request->all());
+        return redirect()->route('categories.index')->with('success','Изменения сохранены');
     }
 
     /**
@@ -62,6 +75,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        dd(__METHOD__);
+        Blog_Category::destroy($id);
+        return redirect()->route('categories.index')->with('success','Категория удалена');
     }
 }
