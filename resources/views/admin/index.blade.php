@@ -41,11 +41,12 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Наименование</th>
+                            <th>Title</th>
                             <th>Slug</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if(isset($tags) && $tags->count() > 0)
                         @foreach($tags as $tag)
                         <tr>
                             <td>{{ $tag->id }}</td>
@@ -53,6 +54,7 @@
                             <td>{{ $tag->slug }}</td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

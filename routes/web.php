@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\ADMIN\MainController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Task3Controller;
 use App\Http\Controllers\Task4Controller;
 use App\Http\Controllers\Task5Controller;
 use App\Http\Controllers\Task6Controller;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -131,4 +133,12 @@ Route::get('logout', [UserController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     Route::get('/',[MainController::class,'index'])->name('admin.index');
+});
+
+Route::group(['prefix' => 'admin'],function(){
+    Route::resource('/categories','App\Http\Controllers\Admin\CategoryController');
+});
+
+Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
+    Route::get('/v',[MainController::class,'rerere'])->name('admin.index');
 });

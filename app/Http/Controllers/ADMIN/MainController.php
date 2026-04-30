@@ -9,12 +9,15 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function index(){
+        return view ('admin.index');
+        
+    }
+    public function rerere(){
         $tag = new Blog_Tag();
         $tag->title ='Hello World!';
         $tag->save();
         $tags = \App\Models\Blog_Tag::all();
 /*         dd($tag); */
         return view ('admin.index',compact('tags'));
-        
     }
 }
