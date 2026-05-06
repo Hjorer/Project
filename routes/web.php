@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\Blog_TagController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\EmployeeController;
