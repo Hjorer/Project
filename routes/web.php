@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\Blog_TagController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Task3Controller;
@@ -136,6 +137,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
 });
 
 Route::group(['prefix' => 'admin'],function(){
+    Route::resource('/tags', Blog_TagController::class);
+    Route::resource('/posts', PostController::class);
     Route::resource('/categories','App\Http\Controllers\Admin\CategoryController');
 });
 

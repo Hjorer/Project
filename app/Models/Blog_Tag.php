@@ -13,6 +13,7 @@ class Blog_Tag extends Model
     public function blog_posts(){
         return $this->belongsToMany(Blog_Post::class);
     }
+     protected $guarded = [];
     /**
      * Return the sluggable configuration array for this model.
      *
