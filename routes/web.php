@@ -10,6 +10,7 @@ use App\Http\Controllers\Task4Controller;
 use App\Http\Controllers\Task5Controller;
 use App\Http\Controllers\Task6Controller;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
@@ -146,3 +147,6 @@ Route::group(['prefix' => 'admin'],function(){
 Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     Route::get('/v',[MainController::class,'rerere'])->name('admin.index');
 });
+
+Route::get('/areg', [UsersController::class, 'create'])->name('register.create');
+Route::post('/areg', [UsersController::class, 'store'])->name('register.store');
