@@ -52,10 +52,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="blog_category_id">Категория</label>
-                                    <select class="form-control" id="blog_category_id" name="blog_category_id">
+                                    <label for="blog__category_id">Категория</label>
+                                    <select class="form-control" id="blog__category_id" name="blog__category_id">
                                         @foreach($categories as $k => $v)
                                             <option value="{{ $k }}">{{ $v }}</option>
+                                            <option value="{{ $k }}" {{ old('blog__category_id') == $k ? 'selected' : '' }}>{{ $v }}</option>
                                         @endforeach
                                     </select>
                                 </div>

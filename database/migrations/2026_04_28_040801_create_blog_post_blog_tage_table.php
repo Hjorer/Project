@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('blog_post_blog_tage', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('blog_tag_id')->unsigned();
-            $table->integer('blog_post_id')->unsigned();
+            $table->integer('blog__tag_id')->unsigned();
+            $table->integer('blog__post_id')->unsigned();
             $table->timestamps();
         });
     }

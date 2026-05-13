@@ -42,7 +42,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // 1. Валидация
+        /*  // 1. Валидация
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -68,6 +68,25 @@ class PostController extends Controller
         if ($request->has('tags')) {
             $post->tags()->sync($request->input('tags'));
         }
+
+        return redirect()->route('posts.index')->with('success', 'Статья добавлена'); */
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+            'blog__category_id' => 'required|integer',
+            'thumbnail' => 'nullable|image',
+        ]);
+
+        // 2. Обработка картинки (работаем уже с $validatedData)
+        if ($request->hasFile('thumbnail')) {
+            $folder = date('Y-m-d');
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store("images/{$folder}");
+        }
+
+        // 3. Создание поста (передаем только проверенные поля)
+        $post = Blog_Post::create($validatedData);
+        $post->tags()->sync($request->tags);
 
         return redirect()->route('posts.index')->with('success', 'Статья добавлена');
     }
@@ -95,7 +114,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'content' => 'required|string',
-            'blog_category_id' => 'required|integer',
+            'blog__category_id' => 'required|integer',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

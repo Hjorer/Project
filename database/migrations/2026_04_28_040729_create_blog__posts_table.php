@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique;
             $table->text('description');
             $table->text('content');
-            $table->integer('blog_category_id')->unsigned();
+            $table->integer('blog__category_id')->unsigned();
             $table->integer('views')->unsigned()->default(0);
             $table->timestamps();
         });
