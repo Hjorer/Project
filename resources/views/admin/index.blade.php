@@ -21,50 +21,51 @@
 
     <!-- Main content -->
     <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Список статей</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Добавить статью</a>
+                            @if (count($posts))
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 30px">#</th>
+                                            <th>Наименование</th>
+                                            <th>Категория</th>
+                                            <th>Теги</th>
+                                            <th>Дата</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($posts as $post)
+                                        <tr>
+                                            <td>{{ $post->id }}</td>
+                                            <td>{{ $post->title }}</td>
+                                            <td>{{ $post->category->title }}</td>
+                                            <td>{{ $post->tags->pluck('title')->join(', ') }}</td>
+                                            <td>{{ $post->created_at }}</td>
+                                            <td>
 
-        <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title"></h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Slug</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if(isset($tags) && $tags->count() > 0)
-                        @foreach($tags as $tag)
-                        <tr>
-                            <td>{{ $tag->id }}</td>
-                            <td>{{ $tag->title }}</td>
-                            <td>{{ $tag->slug }}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Footer
-            </div>
-            <!-- /.card-footer-->
-        </div>
-        <!-- /.card -->
+                                        @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Footer
+                            </div>
+                            <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
 
     </section>
     <!-- /.content -->

@@ -8,6 +8,7 @@ use App\Models\Blog_Category;
 use App\Models\Blog_Tag;
 use App\Models\Blog_Post;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -70,7 +71,7 @@ class PostController extends Controller
         }
 
         return redirect()->route('posts.index')->with('success', 'Статья добавлена'); */
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
             'content' => 'required',
@@ -79,13 +80,11 @@ class PostController extends Controller
         ]);
 
         // 2. Обработка картинки (работаем уже с $validatedData)
-        if ($request->hasFile('thumbnail')) {
-            $folder = date('Y-m-d');
-            $validatedData['thumbnail'] = $request->file('thumbnail')->store("images/{$folder}");
-        }
+        $data = $request->all();
+        $data['thumbnail'] = Blog_Post::uploadImage($request);
 
         // 3. Создание поста (передаем только проверенные поля)
-        $post = Blog_Post::create($validatedData);
+        $post = Blog_Post::create($data);
         $post->tags()->sync($request->tags);
 
         return redirect()->route('posts.index')->with('success', 'Статья добавлена');
@@ -106,49 +105,38 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+      public function update(Request $request, $id)
     {
-        $post = Blog_Post::findOrFail($id);
-
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'content' => 'required|string',
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
             'blog__category_id' => 'required|integer',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail' => 'nullable|image',
         ]);
 
-        // Обновляем запись в таблице posts
-        $post->update($validated);
+        $post = Blog_Post::find($id);
+        $data = $request->all();
+        $data['thumbnail'] = Blog_Post::uploadImage($request, $post->thumbnail);
 
-        // Перепривязываем теги в промежуточной таблице
-        if ($request->has('tags')) {
-            $post->tags()->sync($request->input('tags'));
-        } else {
-            $post->tags()->sync([]); // Если убрали все теги
-        }
+        $post->update($data);
+        $post->tags()->sync($request->tags);
 
         return redirect()->route('posts.index')->with('success', 'Изменения сохранены');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        // 1. Находим статью по ID
-        $post = Blog_Post::findOrFail($id);
-
-        // 2. Отвязываем теги в промежуточной таблице (чтобы не было ошибок foreign key)
-        $post->tags()->detach();
-
-        // 3. Удаляем саму статью
+        $post = Blog_Post::find($id);
+        $post->tags()->sync([]);
+        Storage::delete($post->thumbnail);
         $post->delete();
-
         return redirect()->route('posts.index')->with('success', 'Статья удалена');
     }
 }
