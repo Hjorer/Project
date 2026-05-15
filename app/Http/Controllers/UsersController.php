@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Users;
 
 class UsersController extends Controller
 {
@@ -35,7 +35,7 @@ class UsersController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        $user = User::create([
+        $user = Users::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -76,5 +76,39 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function loginForm()
+    {
+        return view('users.login');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (
+            auth()->attempt([
+                'email' => $request->email,
+                'password' => $request->password,
+            ])
+        ) {
+            session()->flash('success', 'You are logged');
+            if (auth()->user()->is_admin) {
+                return redirect()->route('admin.index');
+            } else {
+                return redirect()->route('home');
+            }
+        }
+
+        return redirect()->back()->with('error', 'Incorrect login or password');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('login.create');
     }
 }

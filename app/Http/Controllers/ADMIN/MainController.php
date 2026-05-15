@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\ADMIN;
 
 use App\Models\Blog_Tag;
+use App\Models\Blog_Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
     public function index(){
-        return view ('admin.index');
+        $posts = Blog_Post::all();
+        return view ('admin.index',compact('posts'));
         
     }
     public function rerere(){

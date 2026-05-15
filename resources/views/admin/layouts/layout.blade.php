@@ -133,7 +133,7 @@
                         <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" alt="User Image" class="img-circle elevation-2">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="{{ route('logout') }}" class="d-block">Alexander Pierce</a>
                     </div>
                 </div>
 
