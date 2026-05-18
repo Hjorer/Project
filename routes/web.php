@@ -87,10 +87,10 @@ Route::get('/task6', [Task6Controller::class, 'task6']);
 Route::get('/task61', [Task6Controller::class, 'view']); */
 
 //Part 2 Task 1
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
 })->name('home');
-
+ */
 /* Route::middleware(['auth','verified'])->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');   
 });
@@ -148,7 +148,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     Route::get('/v',[MainController::class,'rerere'])->name('admin.index');
 });
  */
-
+Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
+Route::get('/article', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.single');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [MainController::class,'index'])->name('admin.index');
     Route::resource('/categories', CategoryController::class);
