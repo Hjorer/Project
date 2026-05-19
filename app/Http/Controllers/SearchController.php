@@ -3,15 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog_Tag;
-class ATagController extends Controller
+use App\Models\Blog_Post;
+
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $request->validate([
+            's' => 'required',
+        ]);
+
+        $s = $request->s;
+
+        // Заменили ->like($s) на ->where(...)
+        $posts = Blog_Post::where('title', 'LIKE', "%{$s}%")
+            ->with('category')
+            ->paginate(2);
+
+        return view('posts.search', compact('posts', 's'));
     }
 
     /**
@@ -33,11 +45,9 @@ class ATagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($slug)
+    public function show(string $id)
     {
-        $tag = Blog_Tag::where('slug', $slug)->firstOrFail();
-        $posts = $tag->blog_posts()->with('category')->orderBy('id', 'desc')->paginate(2);
-        return view('tags.show', compact('tag', 'posts'));
+        //
     }
 
     /**

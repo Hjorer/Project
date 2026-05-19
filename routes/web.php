@@ -11,6 +11,7 @@ use App\Http\Controllers\Task5Controller;
 use App\Http\Controllers\Task6Controller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SearchController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
@@ -152,6 +153,7 @@ Route::get('/', [\App\Http\Controllers\APostController::class, 'index'])->name('
 Route::get('/article/{slug}', [\App\Http\Controllers\APostController::class, 'show'])->name('posts.single');
 Route::get('/category/{slug}', [\App\Http\Controllers\ACategoryController::class, 'show'])->name('categories.single');
 Route::get('/tag/{slug}', [\App\Http\Controllers\ATagController::class, 'show'])->name('tags.single');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [MainController::class,'index'])->name('admin.index');
     Route::resource('/categories', CategoryController::class);

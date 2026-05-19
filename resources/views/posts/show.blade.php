@@ -327,7 +327,6 @@
                 </div><!-- end row -->
             </div><!-- end container -->
         </section>
-
         <footer class="footer">
             <div class="container">
                 <div class="row">
