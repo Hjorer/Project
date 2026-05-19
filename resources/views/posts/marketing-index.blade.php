@@ -49,7 +49,6 @@
 
 </head>
 
-
 <body>
 
     <div id="wrapper">
@@ -158,43 +157,40 @@
                                 </div><!-- end blog-box -->
 
                                 <hr class="invis">
-
-                                <div class="blog-box wow fadeIn">
-                                    <div class="post-media">
-                                        <a href="marketing-single.html" title="">
-                                            <img src="upload/market_blog_02.jpg" alt="" class="img-fluid">
-                                            <div class="hovereffect">
-                                                <span></span>
+                                    @foreach ($posts as $post)
+                                        <div class="blog-box wow fadeIn">
+                                            <div class="post-media">
+                                                <a href="{{ route('posts.single', ['slug' => $post->slug]) }}" title="">
+                                                    <img src="{{ asset('storage/' . $post->thumbnail) }}" alt=""
+                                                        class="img-fluid">
+                                                    <div class="hovereffect">
+                                                        <span></span>
+                                                    </div>
+                                                    <!-- end hover -->
+                                                </a>
                                             </div>
-                                            <!-- end hover -->
-                                        </a>
-                                    </div>
-                                    <!-- end media -->
-                                    <div class="blog-meta big-meta text-center">
-                                        <div class="post-sharing">
-                                            <ul class="list-inline">
-                                                <li><a href="#" class="fb-button btn btn-primary"><i
-                                                            class="fa fa-facebook"></i> <span class="down-mobile">Share
-                                                            on Facebook</span></a></li>
-                                                <li><a href="#" class="tw-button btn btn-primary"><i
-                                                            class="fa fa-twitter"></i> <span class="down-mobile">Tweet
-                                                            on Twitter</span></a></li>
-                                                <li><a href="#" class="gp-button btn btn-primary"><i
-                                                            class="fa fa-google-plus"></i></a></li>
-                                            </ul>
-                                        </div><!-- end post-sharing -->
-                                        <h4><a href="marketing-single.html" title="">The way to reach hundreds of
-                                                thousands of customers is through the SEO</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et
-                                            pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus
-                                            enimcerat elicerat eli nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small><a href="marketing-category.html" title="">Marketing</a></small>
-                                        <small><a href="marketing-single.html" title="">21 July, 2017</a></small>
-                                        <small><a href="#" title="">by Jack</a></small>
-                                        <small><a href="#" title=""><i class="fa fa-eye"></i> 666</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
+                                            <!-- end media -->
+                                            <div class="blog-meta big-meta text-center">
+                                                <div class="post-sharing">
+                                                    <ul class="list-inline">
+                                                        <li><a href="#" class="fb-button btn btn-primary"><i
+                                                                    class="fa fa-facebook"></i> <span class="down-mobile">Share
+                                                                    on Facebook</span></a></li>
+                                                        <li><a href="#" class="tw-button btn btn-primary"><i
+                                                                    class="fa fa-twitter"></i> <span class="down-mobile">Tweet
+                                                                    on Twitter</span></a></li>
+                                                        <li><a href="#" class="gp-button btn btn-primary"><i
+                                                                    class="fa fa-google-plus"></i></a></li>
+                                                    </ul>
+                                                </div><!-- end post-sharing -->
+                                                <h4><a href="{{ route('posts.single', ['slug' => $post->slug]) }}" title="">{{ $post->title }}</a></h4>
+                                                <p>{{ $post->description }}</p>
+                                                <small><a href="{{ route('categories.single', ['slug' => $post->category->slug]) }}" title=""></a>{{ $post->category->title }}</small>
+                                                <small><a href="marketing-single.html" title=""></a>{{ $post->getPostDate() }}</small>
+                                                <small><i class="fa fa-eye"></i>  {{ $post->views }}</small>
+                                            </div><!-- end meta -->
+                                        </div><!-- end blog-box -->
+                                    @endforeach
                                 <hr class="invis">
 
                                 <div class="blog-box wow fadeIn">

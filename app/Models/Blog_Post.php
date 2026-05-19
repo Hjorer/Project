@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 class Blog_Post extends Model
 {
     protected $table = 'blog__posts';
@@ -22,7 +23,8 @@ class Blog_Post extends Model
     }
     public function tags()
     {
-        return $this->belongsToMany(Blog_Tag::class, 'blog_post_blog_tage')->withTimestamps();;
+        return $this->belongsToMany(Blog_Tag::class, 'blog_post_blog_tage')->withTimestamps();
+        ;
     }
     /**
      * Return the sluggable configuration array for this model.
@@ -56,4 +58,9 @@ class Blog_Post extends Model
         }
         return asset("uploads/{$this->thumbnail}");
     }
+    public function getPostDate()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('d F, Y');
+    }
+
 }

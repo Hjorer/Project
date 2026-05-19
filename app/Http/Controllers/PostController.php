@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Blog_Post;
 class PostController extends Controller
 {
     /**
@@ -11,7 +11,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.marketing-index');
+        $posts = Blog_Post::with('category')->orderBy('id', 'desc')->paginate(10);
+        return view('posts.marketing-index',compact('posts'));
     }
 
     /**
@@ -35,7 +36,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        return view('posts.index');
+        return view('posts.marketing-single');
     }
 
     /**

@@ -150,6 +150,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
  */
 Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
 Route::get('/article', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.single');
+Route::get('/article/{slug}', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.single');
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.single');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [MainController::class,'index'])->name('admin.index');
     Route::resource('/categories', CategoryController::class);
