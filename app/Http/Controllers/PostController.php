@@ -34,9 +34,12 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($slug)
     {
-        return view('posts.marketing-single');
+        $post = Blog_Post::where('slug', $slug)->firstOrFail();
+        $post->views += 1;
+        $post->update();
+        return view('posts.marketing-single', compact('post'));
     }
 
     /**

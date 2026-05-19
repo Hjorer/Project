@@ -152,6 +152,7 @@ Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('h
 Route::get('/article', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.single');
 Route::get('/article/{slug}', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.single');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.single');
+Route::get('/tag/{slug}', [Blog_TagController::class, 'show'])->name('tags.single');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [MainController::class,'index'])->name('admin.index');
     Route::resource('/categories', CategoryController::class);
