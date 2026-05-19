@@ -11,7 +11,7 @@ class Blog_Tag extends Model
     protected $table = 'blog__tags';
     use HasFactory,Sluggable;
     public function blog_posts(){
-        return $this->belongsToMany(Blog_Post::class);
+        return $this->belongsToMany(Blog_Post::class, 'blog_post_blog_tage');
     }
      protected $guarded = [];
     /**
