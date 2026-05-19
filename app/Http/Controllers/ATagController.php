@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog_Category;
-class CategoryController extends Controller
+use App\Models\Blog_Tag;
+class ATagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,9 +35,10 @@ class CategoryController extends Controller
      */
     public function show($slug)
     {
-        $category = Blog_Category::where('slug', $slug)->firstOrFail();
-        $posts = $category->blog_posts()->orderBy('id', 'desc')->paginate(2);
-        return view('categories.marketing-category', compact('category', 'posts'));
+        $taga = Blog_Tag::all();
+        $tag = Blog_Tag::where('slug', $slug)->firstOrFail();
+        $posts = $tag->blog_posts()->with('category')->orderBy('id', 'desc')->paginate(2);
+        return view('tags.show', compact('tag', 'posts','taga'));
     }
 
     /**

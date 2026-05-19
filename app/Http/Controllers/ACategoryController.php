@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog_Post;
-class PostController extends Controller
+use App\Models\Blog_Category;
+class ACategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $posts = Blog_Post::with('category')->orderBy('id', 'desc')->paginate(10);
-        return view('posts.marketing-index',compact('posts'));
+        //
     }
 
     /**
@@ -36,10 +35,9 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Blog_Post::where('slug', $slug)->firstOrFail();
-        $post->views += 1;
-        $post->update();
-        return view('posts.marketing-single', compact('post'));
+        $category = Blog_Category::where('slug', $slug)->firstOrFail();
+        $posts = $category->blog_posts()->orderBy('id', 'desc')->paginate(2);
+        return view('categories.show', compact('category', 'posts'));
     }
 
     /**

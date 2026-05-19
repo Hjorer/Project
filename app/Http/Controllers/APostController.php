@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog_Tag;
-class TagController extends Controller
+use App\Models\Blog_Post;
+class APostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $posts = Blog_Post::with('category')->orderBy('id', 'desc')->paginate(10);
+        return view('posts.index',compact('posts'));
     }
 
     /**
@@ -35,9 +36,10 @@ class TagController extends Controller
      */
     public function show($slug)
     {
-        $tag = Blog_Tag::where('slug', $slug)->firstOrFail();
-        $posts = $tag->blog_posts()->with('category')->orderBy('id', 'desc')->paginate(2);
-        return view('tags.marketing-category', compact('tag', 'posts'));
+        $post = Blog_Post::where('slug', $slug)->firstOrFail();
+        $post->views += 1;
+        $post->update();
+        return view('posts.show', compact('post'));
     }
 
     /**

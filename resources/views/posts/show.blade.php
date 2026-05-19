@@ -1,55 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <base href="/">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!-- Basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Site Metas -->
-    <title>Markedia - Marketing Blog Template</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!-- Site Metas -->
+<title>Markedia - Marketing Blog Template</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
-    <!-- Design fonts -->
-    <link href="https://googleapis.com" rel="stylesheet">
-
-    <!-- Bootstrap core CSS -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-
-    <!-- FontAwesome Icons core CSS -->
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/style.css" rel="stylesheet">
-
-    <!-- Animate styles for this template -->
-    <link href="/css/animate.css" rel="stylesheet">
-
-    <!-- Responsive styles for this template -->
-    <link href="/css/responsive.css" rel="stylesheet">
-
-    <!-- Colors for this template -->
-    <link href="/css/colors.css" rel="stylesheet">
-
-    <!-- Version Marketing CSS for this template -->
-    <link href="/css/version/marketing.css" rel="stylesheet">
+<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+<link href="{{ asset('style.css') }}" rel="stylesheet">
+<link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+<link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+<link href="{{ asset('css/colors.css') }}" rel="stylesheet">
+<link href="{{ asset('css/version/marketing.css') }}" rel="stylesheet">
 
 
-    <!--[if lt IE 9]>
+
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -110,26 +85,26 @@
                                     <li class="breadcrumb-item active">{{ $post->title }}</li>
                                 </ol>
 
-                                <span class="color-yellow"><a href="{{ route(
-    'categories.single',
-    ['slug' => $post->category->slug]
-) }}" title="">{{ $post->category->title }}</a></span>
+                                <span class="color-yellow"><a
+                                        href="{{ route('categories.single', ['slug' => $post->category->slug]) }}"
+                                        title="">{{ $post->category->title }}</a></span>
 
                                 <h3>{{ $post->title }}</h3>
 
                                 <div class="blog-meta big-meta">
                                     <small><a href="marketing-single.html"
                                             title="">{{ $post->getPostDate() }}</a></small>
-                                    <small><a href="blog-author.html" title="">by Jessica</a></small>
                                     <small><a href="#" title=""><i class="fa fa-eye"></i> {{ $post->views }}</a></small>
                                 </div><!-- end meta -->
 
                                 <div class="post-sharing">
                                     <ul class="list-inline">
-                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i>
-                                                <span class="down-mobile">Share on Facebook</span></a></li>
-                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i>
-                                                <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="fb-button btn btn-primary"><i
+                                                    class="fa fa-facebook"></i> <span class="down-mobile">Share on
+                                                    Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i
+                                                    class="fa fa-twitter"></i> <span class="down-mobile">Tweet on
+                                                    Twitter</span></a></li>
                                         <li><a href="#" class="gp-button btn btn-primary"><i
                                                     class="fa fa-google-plus"></i></a></li>
                                     </ul>
@@ -137,11 +112,11 @@
                             </div><!-- end title -->
 
                             <div class="single-post-media">
-                                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="img-fluid">
+                                <img src="{{ asset($post->getImage()) }}" alt="" class="img-fluid">
                             </div><!-- end media -->
 
                             <div class="blog-content">
-                                {!! $post->content !!}
+                                {{!! $post->content !!}}
                             </div><!-- end content -->
 
                             <div class="blog-title-area">
@@ -157,15 +132,16 @@
 
                                 <div class="post-sharing">
                                     <ul class="list-inline">
-                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i>
-                                                <span class="down-mobile">Share on Facebook</span></a></li>
-                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i>
-                                                <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="fb-button btn btn-primary"><i
+                                                    class="fa fa-facebook"></i> <span class="down-mobile">Share on
+                                                    Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i
+                                                    class="fa fa-twitter"></i> <span class="down-mobile">Tweet on
+                                                    Twitter</span></a></li>
                                         <li><a href="#" class="gp-button btn btn-primary"><i
                                                     class="fa fa-google-plus"></i></a></li>
                                     </ul>
                                 </div><!-- end post-sharing -->
-                            </div><!-- end title -->
 
                             <div class="row">
                                 <div class="col-lg-12">
@@ -188,24 +164,24 @@
 
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                         <h4><a href="#">Jessica</a></h4>
-                                        <p>Quisque sed tristique felis. Lorem <a href="#">visit my website</a> amet,
-                                            consectetur adipiscing elit. Phasellus quis mi auctor, tincidunt nisl eget,
-                                            finibus odio. Duis tempus elit quis risus congue feugiat. Thanks for stop
-                                            Markedia!</p>
+                                        <p>Quisque sed tristique felis. Lorem <a href="#">visit my website</a>
+                                            amet, consectetur adipiscing elit. Phasellus quis mi auctor, tincidunt nisl
+                                            eget, finibus odio. Duis tempus elit quis risus congue feugiat. Thanks for
+                                            stop Markedia!</p>
 
                                         <div class="topsocial">
                                             <a href="#" data-toggle="tooltip" data-placement="bottom"
                                                 title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i
-                                                    class="fa fa-youtube"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom"
+                                                title="Youtube"><i class="fa fa-youtube"></i></a>
                                             <a href="#" data-toggle="tooltip" data-placement="bottom"
                                                 title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i
-                                                    class="fa fa-twitter"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom"
+                                                title="Twitter"><i class="fa fa-twitter"></i></a>
                                             <a href="#" data-toggle="tooltip" data-placement="bottom"
                                                 title="Instagram"><i class="fa fa-instagram"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Website"><i
-                                                    class="fa fa-link"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom"
+                                                title="Website"><i class="fa fa-link"></i></a>
                                         </div><!-- end social -->
 
                                     </div><!-- end col -->
@@ -221,16 +197,18 @@
                                         <div class="blog-box">
                                             <div class="post-media">
                                                 <a href="marketing-single.html" title="">
-                                                    <img src="upload/market_blog_02.jpg" alt="" class="img-fluid">
+                                                    <img src="upload/market_blog_02.jpg" alt=""
+                                                        class="img-fluid">
                                                     <div class="hovereffect">
                                                         <span class=""></span>
                                                     </div><!-- end hover -->
                                                 </a>
                                             </div><!-- end media -->
                                             <div class="blog-meta">
-                                                <h4><a href="marketing-single.html" title="">We are guests of ABC Design
-                                                        Studio</a></h4>
-                                                <small><a href="blog-category-01.html" title="">Trends</a></small>
+                                                <h4><a href="marketing-single.html" title="">We are guests of
+                                                        ABC Design Studio</a></h4>
+                                                <small><a href="blog-category-01.html"
+                                                        title="">Trends</a></small>
                                                 <small><a href="blog-category-01.html" title="">21 July,
                                                         2017</a></small>
                                             </div><!-- end meta -->
@@ -241,15 +219,16 @@
                                         <div class="blog-box">
                                             <div class="post-media">
                                                 <a href="marketing-single.html" title="">
-                                                    <img src="upload/market_blog_03.jpg" alt="" class="img-fluid">
+                                                    <img src="upload/market_blog_03.jpg" alt=""
+                                                        class="img-fluid">
                                                     <div class="hovereffect">
                                                         <span class=""></span>
                                                     </div><!-- end hover -->
                                                 </a>
                                             </div><!-- end media -->
                                             <div class="blog-meta">
-                                                <h4><a href="marketing-single.html" title="">Nostalgia at work with
-                                                        family</a></h4>
+                                                <h4><a href="marketing-single.html" title="">Nostalgia at work
+                                                        with family</a></h4>
                                                 <small><a href="blog-category-01.html" title="">News</a></small>
                                                 <small><a href="blog-category-01.html" title="">20 July,
                                                         2017</a></small>
@@ -268,7 +247,8 @@
                                         <div class="comments-list">
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src="upload/author.jpg" alt="" class="rounded-circle">
+                                                    <img src="upload/author.jpg" alt=""
+                                                        class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="media-heading user_name">Amanda Martines <small>5 days
@@ -284,7 +264,8 @@
                                             </div>
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src="upload/author_01.jpg" alt="" class="rounded-circle">
+                                                    <img src="upload/author_01.jpg" alt=""
+                                                        class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">
 
@@ -301,7 +282,8 @@
                                             </div>
                                             <div class="media last-child">
                                                 <a class="media-left" href="#">
-                                                    <img src="upload/author_02.jpg" alt="" class="rounded-circle">
+                                                    <img src="upload/author_02.jpg" alt=""
+                                                        class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">
 
@@ -346,8 +328,8 @@
                                     <h3>Subscribe Today!</h3>
                                     <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
                                     <form class="form-inline" method="post">
-                                        <input type="text" name="email" placeholder="Add your email here.." required
-                                            class="form-control" />
+                                        <input type="text" name="email" placeholder="Add your email here.."
+                                            required class="form-control" />
                                         <input type="submit" value="Subscribe" class="btn btn-default btn-block" />
                                     </form>
                                 </div><!-- end newsletter -->
@@ -360,7 +342,8 @@
                                         <a href="marketing-single.html"
                                             class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 justify-content-between">
-                                                <img src="upload/small_07.jpg" alt="" class="img-fluid float-left">
+                                                <img src="upload/small_07.jpg" alt=""
+                                                    class="img-fluid float-left">
                                                 <h5 class="mb-1">5 Beautiful buildings you need to before dying</h5>
                                                 <small>12 Jan, 2016</small>
                                             </div>
@@ -369,7 +352,8 @@
                                         <a href="marketing-single.html"
                                             class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 justify-content-between">
-                                                <img src="upload/small_08.jpg" alt="" class="img-fluid float-left">
+                                                <img src="upload/small_08.jpg" alt=""
+                                                    class="img-fluid float-left">
                                                 <h5 class="mb-1">Let's make an introduction for creative life</h5>
                                                 <small>11 Jan, 2016</small>
                                             </div>
@@ -378,8 +362,10 @@
                                         <a href="marketing-single.html"
                                             class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="w-100 last-item justify-content-between">
-                                                <img src="upload/small_09.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">Did you see the most beautiful sea in the world?</h5>
+                                                <img src="upload/small_09.jpg" alt=""
+                                                    class="img-fluid float-left">
+                                                <h5 class="mb-1">Did you see the most beautiful sea in the world?
+                                                </h5>
                                                 <small>07 Jan, 2016</small>
                                             </div>
                                         </a>
@@ -399,15 +385,24 @@
                             <div class="widget">
                                 <h2 class="widget-title">Instagram Feed</h2>
                                 <div class="instagram-wrapper clearfix">
-                                    <a class="" href="#"><img src="upload/small_09.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_01.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_02.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_03.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_04.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_05.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_06.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_07.jpg" alt="" class="img-fluid"></a>
-                                    <a href="#"><img src="upload/small_08.jpg" alt="" class="img-fluid"></a>
+                                    <a class="" href="#"><img src="upload/small_09.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_01.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_02.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_03.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_04.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_05.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_06.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_07.jpg" alt=""
+                                            class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_08.jpg" alt=""
+                                            class="img-fluid"></a>
                                 </div><!-- end Instagram wrapper -->
                             </div><!-- end widget -->
 
@@ -442,7 +437,8 @@
                                     <a href="marketing-single.html"
                                         class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="w-100 justify-content-between">
-                                            <img src="upload/small_04.jpg" alt="" class="img-fluid float-left">
+                                            <img src="upload/small_04.jpg" alt=""
+                                                class="img-fluid float-left">
                                             <h5 class="mb-1">5 Beautiful buildings you need to before dying</h5>
                                             <small>12 Jan, 2016</small>
                                         </div>
@@ -451,7 +447,8 @@
                                     <a href="marketing-single.html"
                                         class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="w-100 justify-content-between">
-                                            <img src="upload/small_05.jpg" alt="" class="img-fluid float-left">
+                                            <img src="upload/small_05.jpg" alt=""
+                                                class="img-fluid float-left">
                                             <h5 class="mb-1">Let's make an introduction for creative life</h5>
                                             <small>11 Jan, 2016</small>
                                         </div>
@@ -460,7 +457,8 @@
                                     <a href="marketing-single.html"
                                         class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="w-100 last-item justify-content-between">
-                                            <img src="upload/small_06.jpg" alt="" class="img-fluid float-left">
+                                            <img src="upload/small_06.jpg" alt=""
+                                                class="img-fluid float-left">
                                             <h5 class="mb-1">Did you see the most beautiful sea in the world?</h5>
                                             <small>07 Jan, 2016</small>
                                         </div>
@@ -478,7 +476,8 @@
                                     <a href="marketing-single.html"
                                         class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="w-100 justify-content-between">
-                                            <img src="upload/small_01.jpg" alt="" class="img-fluid float-left">
+                                            <img src="upload/small_01.jpg" alt=""
+                                                class="img-fluid float-left">
                                             <h5 class="mb-1">Banana-chip chocolate cake recipe with customs</h5>
                                             <span class="rating">
                                                 <i class="fa fa-star"></i>
@@ -493,7 +492,8 @@
                                     <a href="marketing-single.html"
                                         class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="w-100 justify-content-between">
-                                            <img src="upload/small_02.jpg" alt="" class="img-fluid float-left">
+                                            <img src="upload/small_02.jpg" alt=""
+                                                class="img-fluid float-left">
                                             <h5 class="mb-1">10 practical ways to choose organic vegetables</h5>
                                             <span class="rating">
                                                 <i class="fa fa-star"></i>
@@ -508,7 +508,8 @@
                                     <a href="marketing-single.html"
                                         class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="w-100 last-item justify-content-between">
-                                            <img src="upload/small_03.jpg" alt="" class="img-fluid float-left">
+                                            <img src="upload/small_03.jpg" alt=""
+                                                class="img-fluid float-left">
                                             <h5 class="mb-1">We are making homemade ravioli, nice and good</h5>
                                             <span class="rating">
                                                 <i class="fa fa-star"></i>

@@ -148,11 +148,10 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     Route::get('/v',[MainController::class,'rerere'])->name('admin.index');
 });
  */
-Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
-Route::get('/article', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.single');
-Route::get('/article/{slug}', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.single');
-Route::get('/category/{slug}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('categories.single');
-Route::get('/tag/{slug}', [\App\Http\Controllers\TagController::class, 'show'])->name('tags.single');
+Route::get('/', [\App\Http\Controllers\APostController::class, 'index'])->name('home');
+Route::get('/article/{slug}', [\App\Http\Controllers\APostController::class, 'show'])->name('posts.single');
+Route::get('/category/{slug}', [\App\Http\Controllers\ACategoryController::class, 'show'])->name('categories.single');
+Route::get('/tag/{slug}', [\App\Http\Controllers\ATagController::class, 'show'])->name('tags.single');
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [MainController::class,'index'])->name('admin.index');
     Route::resource('/categories', CategoryController::class);
